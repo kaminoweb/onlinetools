@@ -61,9 +61,9 @@ This repository currently includes the following utilities:
 
 If you'd like to contribute to this project:
 
-    Fork the repository.
-    Create a new branch for your feature or bug fix.
-    Make your changes and submit a pull request.
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3.  Make your changes and submit a pull request.
 
 ## License
 
