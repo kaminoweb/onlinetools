@@ -1,3 +1,7 @@
+## Disclaimer
+
+This code was generated with the assistance of AI tools (ChatGPT). Please review and test the code to ensure it meets your project requirements.
+
 # Online Tools Repository
 
 This repository contains a collection of simple and useful online utility tools. These tools are designed to be lightweight and efficient, and all operations are performed on the client side. No data is transmitted to the server, ensuring user privacy and security.
