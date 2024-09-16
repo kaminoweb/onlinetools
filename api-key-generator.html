@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Key Generator</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- UUID Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
+
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #18110e;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 90vw;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        textarea {
+            background-color: #f9f9f9;
+            color: #18110e;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            font-family: sans-serif;
+            resize: vertical;
+            height: 150px;
+        }
+
+        #apiKeyOutput {
+            height: 100px;
+        }
+
+        #generateBtn {
+            background-color: #071949;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            font-family: 'Poppins', sans-serif;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        #generateBtn:hover {
+            background-color: #061a6a;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #18110e;
+        }
+
+        #copyBtn,
+        #resetBtn {
+            background-color: transparent;
+            border: none;
+            color: #071949;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        #copyBtn:hover,
+        #resetBtn:hover {
+            color: #ffad01;
+        }
+
+        .copy-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            #apiKeyOutput {
+                height: 100px;
+            }
+
+            #generateBtn {
+                width: 100%;
+                max-width: none;
+            }
+
+            .container h1 {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            #apiKeyOutput {
+                height: 100px;
+            }
+
+            .container h1 {
+                font-size: 22px;
+            }
+
+            #generateBtn {
+                padding: 12px;
+                font-size: 14px;
+                width: 100%;
+            }
+        }
+
+        /* Centering the buttons */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1><b>API Key Generator</b></h1>
+        <p>Generate unique API keys easily and securely.</p>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="copy-container">
+                    <h5>Generated API Key</h5>
+                    <button id="copyBtn" title="Copy to clipboard">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <textarea id="apiKeyOutput" readonly></textarea>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="button-container">
+                <button id="generateBtn">Generate API Key</button>
+            </div>
+        </div>
+
+        <footer>
+            &copy; KAMINOWEB INC<br>All operations are performed on the client side.
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+        integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- API Key Generator Script -->
+    <script>
+        // Generate UUID (API Key)
+        document.getElementById("generateBtn").addEventListener("click", function () {
+            const apiKey = uuid.v4(); // Generate a UUID v4
+            document.getElementById("apiKeyOutput").value = apiKey;
+        });
+
+        // Copy API Key to Clipboard
+        document.getElementById("copyBtn").addEventListener("click", function () {
+            const apiKeyOutput = document.getElementById("apiKeyOutput");
+            apiKeyOutput.select();
+            document.execCommand("copy");
+
+            // Show feedback that the content has been copied
+            alert("API Key copied to clipboard!");
+        });
+    </script>
+</body>
+
+</html>
+
