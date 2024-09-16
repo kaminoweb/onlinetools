@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON to CSV Converter</title>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+<!-- FontAwesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+body {
+background-color: #ffffff;
+color: #18110e;
+font-family: 'Poppins', sans-serif;
+text-align: center;
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 0;
+padding: 0;
+}
+
+.container {
+max-width: 900px;
+width: 90vw;
+margin: 0 auto;
+padding: 20px;
+}
+
+textarea {
+background-color: #f9f9f9;
+color: #18110e;
+width: 100%;
+padding: 10px;
+border: 1px solid #ddd;
+font-family: sans-serif;
+resize: vertical;
+height: 200px;
+}
+
+#inputJSON {
+height: 150px;
+}
+
+#resultCSV {
+height: 250px;
+}
+
+#convertBtn {
+background-color: #071949;
+color: #ffffff;
+border: none;
+padding: 10px 20px;
+font-size: 16px;
+margin: 10px;
+font-family: 'Poppins', sans-serif;
+width: 100%;
+max-width: 300px;
+}
+
+#convertBtn:hover {
+background-color: #061a6a;
+}
+
+#errorMessage {
+color: red;
+font-size: 14px;
+margin-top: 10px;
+display: none;
+}
+
+footer {
+margin-top: 30px;
+font-size: 14px;
+color: #18110e;
+}
+
+#copyBtn,
+#resetBtn {
+background-color: transparent;
+border: none;
+color: #071949;
+cursor: pointer;
+margin-top: 5px;
+}
+
+#copyBtn:hover,
+#resetBtn:hover {
+color: #ffad01;
+}
+
+.copy-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+#inputJSON,
+#resultCSV {
+height: 150px;
+}
+
+#convertBtn {
+width: 100%;
+max-width: none;
+}
+
+.container h1 {
+font-size: 24px;
+}
+}
+
+@media (max-width: 576px) {
+#inputJSON,
+#resultCSV {
+height: 130px;
+}
+
+.container h1 {
+font-size: 22px;
+}
+
+#convertBtn {
+padding: 12px;
+font-size: 14px;
+width: 100%;
+}
+}
+
+/* Centering the buttons */
+.button-container {
+display: flex;
+justify-content: center;
+gap: 20px;
+flex-wrap: wrap;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<h1><b>JSON to CSV Converter</b></h1>
+<p>Convert JSON data to CSV format easily and securely.</p>
+
+<div class="row">
+<div class="col-12">
+<div class="copy-container">
+<h5>Input JSON</h5>
+<button id="resetBtn" title="Clear inputs">
+<i class="fas fa-undo-alt"></i>
+</button>
+</div>
+<textarea id="inputJSON" placeholder="Enter your JSON here..."></textarea>
+<div id="errorMessage">Invalid JSON format. Please ensure the input is valid JSON.</div>
+</div>
+</div>
+
+<div class="row mt-3">
+<div class="button-container">
+<button id="convertBtn">Convert to CSV</button>
+</div>
+</div>
+
+<div class="row mt-4">
+<div class="col-12">
+<div class="copy-container">
+<h5>Result CSV</h5>
+<button id="copyBtn" title="Copy to clipboard">
+<i class="fas fa-copy"></i>
+</button>
+</div>
+<textarea id="resultCSV" readonly></textarea>
+</div>
+</div>
+
+<footer>
+&copy; KAMINOWEB INC
+<br>
+<a href="https://kaminoweb.com/wordpress-maintenance-plans/" title="WordPress Maintenance Plans">WordPress Maintenance Plans</a> | <a href="https://kaminoweb.com/managed-wordpress-hosting/" title="Managed WordPress Hosting">Managed WordPress Hosting</a> | <a href="https://kaminoweb.com/website-design/" title="WordPress Website Design">WordPress Website Design</a>
+<br><br>
+All operations are performed on the client side.
+</footer>
+</div>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- JSON to CSV Conversion Script -->
+<script>
+// Convert JSON to CSV
+document.getElementById("convertBtn").addEventListener("click", function () {
+const inputJSON = document.getElementById("inputJSON").value;
+const errorMessage = document.getElementById("errorMessage");
+
+try {
+const jsonObj = JSON.parse(inputJSON);
+const csvOutput = jsonToCsv(jsonObj);
+document.getElementById("resultCSV").value = csvOutput; // Display CSV output
+errorMessage.style.display = 'none'; // Hide error message if conversion is successful
+} catch (error) {
+errorMessage.style.display = 'block'; // Show error message if JSON is invalid
+}
+});
+
+// Copy CSV result to clipboard
+document.getElementById("copyBtn").addEventListener("click", function () {
+const resultCSV = document.getElementById("resultCSV");
+resultCSV.select();
+document.execCommand("copy");
+
+// Show feedback that the content has been copied
+alert("Result CSV copied to clipboard!");
+});
+
+// Clear both Input JSON and Result CSV
+document.getElementById("resetBtn").addEventListener("click", function () {
+document.getElementById("inputJSON").value = "";
+document.getElementById("resultCSV").value = "";
+document.getElementById("errorMessage").style.display = 'none'; // Hide error message
+});
+
+// Function to convert JSON to CSV
+function jsonToCsv(json) {
+const array = Array.isArray(json) ? json : [json];
+const headers = Object.keys(array[0]);
+const csvRows = [];
+
+csvRows.push(headers.join(',')); // Add headers
+
+array.forEach(obj => {
+const row = headers.map(header => {
+const value = obj[header] ? obj[header] : '';
+return `"${value}"`; // Add quotes around each value to handle commas
+});
+csvRows.push(row.join(','));
+});
+
+return csvRows.join("\n"); // Join rows with newline
+}
+</script>
+</body>
+</html>
