@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lorem Ipsum Generator</title>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+<!-- FontAwesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+body {
+background-color: #ffffff;
+color: #18110e;
+font-family: 'Poppins', sans-serif;
+text-align: center;
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 0;
+padding: 0;
+}
+
+.container {
+max-width: 900px;
+width: 90vw;
+margin: 0 auto;
+padding: 20px;
+}
+
+textarea {
+background-color: #f9f9f9;
+color: #18110e;
+width: 100%;
+padding: 10px;
+border: 1px solid #ddd;
+font-family: sans-serif;
+resize: vertical;
+height: 150px;
+}
+
+#loremIpsumOutput {
+height: 300px;
+}
+
+#generateBtn {
+background-color: #071949;
+color: #ffffff;
+border: none;
+padding: 10px 20px;
+font-size: 16px;
+margin: 10px;
+font-family: 'Poppins', sans-serif;
+width: 100%;
+max-width: 300px;
+}
+
+#generateBtn:hover {
+background-color: #061a6a;
+}
+
+footer {
+margin-top: 30px;
+font-size: 14px;
+color: #18110e;
+}
+
+#copyBtn,
+#resetBtn {
+background-color: transparent;
+border: none;
+color: #071949;
+cursor: pointer;
+margin-top: 5px;
+}
+
+#copyBtn:hover,
+#resetBtn:hover {
+color: #ffad01;
+}
+
+.copy-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+#loremIpsumOutput {
+height: 250px;
+}
+
+#generateBtn {
+width: 100%;
+max-width: none;
+}
+
+.container h1 {
+font-size: 24px;
+}
+}
+
+@media (max-width: 576px) {
+#loremIpsumOutput {
+height: 200px;
+}
+
+.container h1 {
+font-size: 22px;
+}
+
+#generateBtn {
+padding: 12px;
+font-size: 14px;
+width: 100%;
+}
+}
+
+/* Centering the buttons */
+.button-container {
+display: flex;
+justify-content: center;
+gap: 20px;
+flex-wrap: wrap;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+    <div class="text-center mb-4">
+        <img src="https://kaminoweb.com/pub/kaminoweb-logo-icon-512x512.png" alt="Kaminoweb Logo" class="img-fluid" style="max-width: 150px;">
+    </div>
+
+    <h1><b>Lorem Ipsum Generator</b></h1>
+    <p>Generate random Lorem Ipsum text easily for your projects.</p>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="copy-container">
+                <h5>Generated Lorem Ipsum</h5>
+                <div>
+                    <button id="copyBtn" title="Copy to clipboard">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <button id="resetBtn" title="Reset Page">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <textarea id="loremIpsumOutput" readonly></textarea>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <label for="paragraphs">Number of Paragraphs:</label>
+            <input type="number" id="paragraphs" value="3" min="1" class="form-control">
+        </div>
+        <div class="button-container mt-3">
+            <button id="generateBtn">Generate Lorem Ipsum</button>
+        </div>
+    </div>
+
+    <footer>
+        KAMINOWEB INC
+        <br>
+        <a href="https://kaminoweb.com/wordpress-maintenance-plans/" title="WordPress Maintenance Plans">WordPress Maintenance Plans</a> |
+        <a href="https://kaminoweb.com/managed-wordpress-hosting/" title="Managed WordPress Hosting">Managed WordPress Hosting</a> |
+        <a href="https://kaminoweb.com/website-design/" title="WordPress Website Design">WordPress Website Design</a>
+        <br><br>
+        All operations are performed on the client side.
+    </footer>
+</div>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Lorem Ipsum Generator Script -->
+<script>
+const loremIpsumParagraphs = [
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.",
+    "Phasellus libero justo, viverra et eros at, sollicitudin congue metus. Nam tempus enim sit amet nunc porta volutpat. Donec pellentesque, tortor nec vestibulum viverra, metus purus mollis enim, nec fermentum magna felis sed elit.",
+    "Mauris suscipit pretium quam, et sodales ligula viverra et. Cras vulputate scelerisque leo id viverra. Donec nec tristique turpis. Nulla facilisi. Praesent vehicula risus ut elit pulvinar, et scelerisque libero tincidunt.",
+    "Sed tincidunt, metus eget consectetur auctor, ligula ante facilisis velit, nec ullamcorper quam nisi a erat. Etiam a erat mi. Duis sagittis mi nec purus viverra, id volutpat leo placerat.",
+    "Aliquam erat volutpat. Donec pulvinar tincidunt massa, in vehicula libero posuere vel. Nunc consectetur ipsum vel erat consectetur, et vestibulum libero dictum. Nullam in sapien id urna bibendum dapibus.",
+    "Pellentesque vel lectus sed quam fermentum vehicula. Sed congue eros orci, eu lacinia turpis efficitur et. Quisque rutrum magna sit amet nunc condimentum, vel tincidunt turpis malesuada.",
+    "Suspendisse potenti. Integer molestie lacinia libero, nec porttitor metus ullamcorper id. Nam fermentum ligula quis dui rhoncus, vitae venenatis lorem vehicula. Fusce laoreet feugiat quam.",
+    "Aenean vel ante vel lectus volutpat faucibus. Vivamus dignissim felis ac nisi scelerisque, sit amet tincidunt metus gravida. In faucibus quam a sapien rhoncus consectetur.",
+    "Etiam consequat luctus felis, a bibendum lacus scelerisque nec. Donec malesuada metus eget metus bibendum, et eleifend elit ultricies. Sed blandit massa ut magna sollicitudin dictum."
+];
+
+// Generate Lorem Ipsum Text
+function generateLoremIpsum(paragraphs) {
+    let output = "";
+    for (let i = 0; i < paragraphs; i++) {
+        const randomParagraph = loremIpsumParagraphs[Math.floor(Math.random() * loremIpsumParagraphs.length)];
+        output += randomParagraph + "\n\n";
+    }
+    return output.trim();
+}
+
+document.getElementById("generateBtn").addEventListener("click", function () {
+    const numParagraphs = document.getElementById("paragraphs").value;
+    const loremIpsum = generateLoremIpsum(numParagraphs);
+    document.getElementById("loremIpsumOutput").value = loremIpsum;
+});
+
+// Copy Lorem Ipsum to Clipboard
+document.getElementById("copyBtn").addEventListener("click", function () {
+    const loremIpsumOutput = document.getElementById("loremIpsumOutput");
+    loremIpsumOutput.select();
+    document.execCommand("copy");
+
+    // Show feedback that the content has been copied
+    alert("Lorem Ipsum copied to clipboard!");
+});
+
+// Reset the page to initial state
+document.getElementById("resetBtn").addEventListener("click", function () {
+    document.getElementById("loremIpsumOutput").value = "";
+    document.getElementById("paragraphs").value = 3;
+});
+</script>
+</body>
+</html>
+
